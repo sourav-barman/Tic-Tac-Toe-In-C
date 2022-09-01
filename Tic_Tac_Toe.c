@@ -9,7 +9,7 @@ void playWithEvilComputer();
 void playWithAnotherPlayer();
 int findWinner(int, int [3][3]);
 int checkWinningPossibility(int, int [3][3]);
-//void displayResult(char [], char [], int [3][3], char []);
+void displayResult(char [], char [], int [3][3], char []);
 
 int main() {
 	int choice;
@@ -21,7 +21,7 @@ int main() {
 		printf("\n2. Want to play with Evil Computer");
 		printf("\n3. Want to play with Another Player");
 		printf("\n4. Exit");
-		printf("\n*************************************");
+		printf("\n\n*************************************");
 		printf("\n\nEnter your choice: ");
 		scanf("%d", &choice);
 
@@ -61,18 +61,18 @@ void displayBoard(int board[3][3]) {
         printf("|\n\t+---+---+---+\n\t");
     }
 }
-/*
-void displayResult(char player1[], char player2[], int board[3][3], char winner[]) {
+
+void displayResult(char player1[], char player2[], int board[3][3], char message[]) {
 	system("cls");
 	printf("\n************ TIC-TAC-TOE ************");
 	printf("\n\nFirst Player 'X'  : %s", player1);
 	printf("\nSecond Player 'O' : %s\n", player2);
 	displayBoard(board);
 	printf("\n*************************************");
-	printf("\n\n\t%s\n", winner);
+	printf("\n\n\t%s\n", message);
 	printf("\n*************************************");
 }
-*/
+
 int findWinner(int player, int board[3][3]) {
 	int i;
 
@@ -125,7 +125,7 @@ void playWithSmartComputer() {
 
 	printf("\nEnter player name: ");
 	fflush(stdin);
-	fgets(player, 30, stdin);
+	scanf("%[^\n]s", player);
 	 
 	while(1) {
 		system("cls");
@@ -144,37 +144,17 @@ void playWithSmartComputer() {
 				move++;
 
 				if (findWinner('X', board)) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Smart Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tPlayer X Won\n");
-					printf("\n*************************************");
+					displayResult(player, "Smart Computer", board, "Player X Won");
 					return;
 				} 
 				if (move == 9) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Smart Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tGame Draw\n");
-					printf("\n*************************************");
+					displayResult(player, "Smart Computer", board, "Game Draw");
 					return;
 				}
 
 				/*Computer's Turn*/
 				
 				if (!checkWinningPossibility('O', board) && !checkWinningPossibility('X', board)) {
-					/*for(i=0; i<9; i++) {
-						if (*(p+i) != 'X' && *(p+i) != 'O') {
-							*(p+i) = 'O';
-							break;
-						}
-					}*/
 					srand(time(0));
 					i = rand() % 9;
 					while(*(p+i) == 'X' || *(p+i) == 'O')
@@ -184,14 +164,7 @@ void playWithSmartComputer() {
 				move++;
 				
 				if (findWinner('O', board)) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Smart Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tPlayer O Won\n");
-					printf("\n*************************************");
+					displayResult(player, "Smart Computer", board, "Player O Won");
 					return;
 				} 
 			}
@@ -214,7 +187,7 @@ void playWithEvilComputer() {
 
 	printf("\nEnter player name: ");
 	fflush(stdin);
-	fgets(player, 30, stdin);
+	scanf("%[^\n]s", player);
 	 
 	while(1) {
 		system("cls");
@@ -233,25 +206,11 @@ void playWithEvilComputer() {
 				move++;
 
 				if (findWinner('X', board)) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Evil Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tPlayer X Won\n");
-					printf("\n*************************************");
+					displayResult(player, "Evil Computer", board, "Player X Won");
 					return;
 				} 
 				if (move == 9) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Evil Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tMatch Draw\n");
-					printf("\n*************************************");
+					displayResult(player, "Evil Computer", board, "Game Draw");
 					return;
 				}
 
@@ -276,25 +235,11 @@ void playWithEvilComputer() {
 				}
 
 				if (findWinner('O', board)) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Evil Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tPlayer O Won\n");
-					printf("\n*************************************");
+					displayResult(player, "Evil Computer", board, "Player O Won");
 					return;
 				} 				
 				if (move == 9) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player);
-					printf("\nSecond Player 'O' : Evil Computer\n");
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tMatch Draw\n");
-					printf("\n*************************************");
+					displayResult(player, "Evil Computer", board, "Game Draw");
 					return;
 				}
 			}
@@ -316,10 +261,10 @@ void playWithAnotherPlayer() {
 
 	printf("\nEnter first player name: ");
 	fflush(stdin);
-	fgets(player1, 30, stdin);
+	scanf("%[^\n]s", player1);
 	printf("\nEnter second player name: ");
 	fflush(stdin);
-	fgets(player2, 30, stdin);
+	scanf("%[^\n]s", player2);
 
 	turn = 'X', move = 0, p = &board[0][0];
 
@@ -341,25 +286,14 @@ void playWithAnotherPlayer() {
 				move++;
 
 				if (findWinner(turn, board)) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player1);
-					printf("\nSecond Player 'O' : %s\n", player2);
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tPlayer %c Won\n", turn);
-					printf("\n*************************************");
+					if (turn == 'X')
+						displayResult(player1, player2, board, "Player X Won");
+					else	
+						displayResult(player1, player2, board, "Player O Won");
 					return;
 				} 
 				if (move == 9) {
-					system("cls");
-					printf("\n************ TIC-TAC-TOE ************");
-					printf("\n\nFirst Player 'X'  : %s", player1);
-					printf("\nSecond Player 'O' : %s\n", player2);
-					displayBoard(board);
-					printf("\n*************************************");
-					printf("\n\n\tGame Draw\n");
-					printf("\n*************************************");
+					displayResult(player1, player2, board, "Game Draw");
 					return;
 				}
 
